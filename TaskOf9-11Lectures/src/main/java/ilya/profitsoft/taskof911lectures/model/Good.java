@@ -24,9 +24,6 @@ public class Good {
     @Column(name = "rating", nullable = false)
     private int rating;
     
-    @Column(name = "quantity", nullable = false)
-    private int quantity;
-    
     @Column(name = "manufacturer")
     private String manufacturer;
     
@@ -34,10 +31,9 @@ public class Good {
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
     
-    public Good(String title, int rating, int quantity, String manufacturer, Category category) {
+    public Good(String title, int rating, String manufacturer, Category category) {
         this.title = title;
         this.rating = rating;
-        this.quantity = quantity;
         this.manufacturer = manufacturer;
         this.category = category;
     }

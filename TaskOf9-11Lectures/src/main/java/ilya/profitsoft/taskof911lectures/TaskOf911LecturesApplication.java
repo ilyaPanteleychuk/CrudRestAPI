@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import java.util.List;
 
 
@@ -36,11 +35,11 @@ public class TaskOf911LecturesApplication implements CommandLineRunner {
         Category fishing = new Category("Fishing");
         categoryRepository.save(fishing);
         List<Good> goods = List.of(
-                new Good("Super Rifle", 5, 20, "Uncle Sam", hunting),
-                new Good("Super Dumbbell", 4, 200, "Big Ronny", sport),
-                new Good("Super Frier", 4, 53, "Sanders", furniture),
-                new Good("Super Bench Press", 4, 10, "Catler", sport),
-                new Good("Super Rod", 3, 24, "Ktulhu", fishing));
+                new Good("Super Rifle", 5,  "Uncle Sam", hunting),
+                new Good("Super Dumbbell", 4,  "Big Ronny", sport),
+                new Good("Super Frier", 4,  "Sanders", furniture),
+                new Good("Super Bench Press", 4,  "Catler", sport),
+                new Good("Super Rod", 3,  "Ktulhu", fishing));
         goodRepository.saveAll(goods);
     }
 }

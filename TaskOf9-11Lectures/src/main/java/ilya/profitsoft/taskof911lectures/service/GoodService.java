@@ -52,10 +52,10 @@ public class GoodService {
                 .getContent();
     }
     
-    public void createGood(GoodSaveDto dto) {
+    public long createGood(GoodSaveDto dto) {
         Good newGood = new Good();
         updateGoodFormDto(newGood, dto);
-        goodRepository.save(newGood);
+        return goodRepository.save(newGood).getId();
     }
     
     public void updateGood(Long id, GoodSaveDto goodSaveDto) {
@@ -71,7 +71,6 @@ public class GoodService {
     private void updateGoodFormDto(Good newGood, GoodSaveDto dto) {
         newGood.setTitle(dto.getTitle());
         newGood.setRating(dto.getRating());
-        newGood.setQuantity(dto.getQuantity());
         newGood.setManufacturer(dto.getManufacturer());
         newGood.setCategory(resolveCategory(dto.getCategoryId()));
     }
