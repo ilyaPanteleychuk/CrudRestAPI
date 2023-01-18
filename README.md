@@ -1,3 +1,5 @@
 # taskOf9-11Lectures
-###
-This repo is for educational purposes only
+
+## Installation
+For using this project you have to:
+> 1. Create postgresDB with name - Product
