@@ -4,9 +4,11 @@ import ilya.profitsoft.taskof911lectures.dto.GoodQueryDto;
 import ilya.profitsoft.taskof911lectures.dto.GoodSaveDto;
 import ilya.profitsoft.taskof911lectures.dto.RestResponse;
 import ilya.profitsoft.taskof911lectures.model.Good;
+import ilya.profitsoft.taskof911lectures.searchmodule.SearchGoodService;
 import ilya.profitsoft.taskof911lectures.service.GoodService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,10 +27,12 @@ import java.util.List;
 public class GoodController {
     
     private final GoodService goodService;
+    private final SearchGoodService searchGoodService;
     
     @Autowired
-    public GoodController(GoodService goodService) {
+    public GoodController(GoodService goodService, SearchGoodService searchGoodService) {
         this.goodService = goodService;
+        this.searchGoodService = searchGoodService;
     }
     
     @GetMapping
@@ -49,24 +53,14 @@ public class GoodController {
         return new RestResponse("OK");
     }
     
-    @PostMapping("/_searchByRating")
-    public List<Good> findAllGoodsByRating(@RequestBody GoodQueryDto goodQueryDto){
-        return goodService.findAllGoodsByRating(goodQueryDto);
-    }
-    
-    @PostMapping("/_searchByCategory")
-    public List<Good> findAllGoodsByCategory(@RequestBody GoodQueryDto goodQueryDto){
-        return goodService.findAllGoodsByCategory(goodQueryDto);
-    }
-    
-    @PostMapping("/_searchByCategoryAndManufacturer")
-    public List<Good> findAllGoodsByCategoryAndManufacturer(@RequestBody GoodQueryDto goodQueryDto){
-        return goodService.findAllGoodsByCategoryAndManufacturer(goodQueryDto);
-    }
-    
     @DeleteMapping("/{id}")
     public RestResponse deleteGood(@PathVariable long id){
         goodService.deleteGood(id);
         return new RestResponse("OK");
+    }
+    
+    @PostMapping("_search")
+    public List<Good> searchGoods(@RequestBody GoodQueryDto goodQueryDto){
+        return searchGoodService.searchGood(goodQueryDto);
     }
 }

@@ -2,6 +2,7 @@ package ilya.profitsoft.taskof911lectures.dto;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.jackson.Jacksonized;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.bind.DefaultValue;
@@ -18,11 +19,13 @@ public class GoodQueryDto {
     
     private int quantity;
     
-    private int rating;
+    private Integer rating;
     
     private String manufacturer;
     
-    private int from;
+    @Setter
+    private Integer from;
     
-    private int size;
+    @Setter
+    private Integer size;
 }
