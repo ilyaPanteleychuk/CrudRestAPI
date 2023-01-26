@@ -17,7 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-
+import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -98,7 +98,7 @@ public class GoodControllerIntTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is2xxSuccessful())
                 .andReturn();
-        ArrayList<Good> goods = parseResponse(mvcResult, ArrayList.class);
+        List<Good> goods = parseResponse(mvcResult, ArrayList.class);
         assertThat(goods.size()).isEqualTo(5);
     }
     
@@ -107,16 +107,14 @@ public class GoodControllerIntTest {
             throws Exception{
         GoodQueryDto goodQueryDto = GoodQueryDto.builder()
                 .rating(4)
-                .from(0)
-                .size(3)
                 .build();
         MvcResult mvcResult = mockMvc.perform
-                        (post("/api/v1/good/_searchByRating")
+                        (post("/api/v1/good/_search")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(goodQueryDto)))
                 .andExpect(status().is2xxSuccessful())
                 .andReturn();
-        ArrayList<Good> goods = parseResponse(mvcResult, ArrayList.class);
+        List<Good> goods = parseResponse(mvcResult, ArrayList.class);
         assertThat(goods.size()).isEqualTo(3);
     }
     
@@ -129,12 +127,12 @@ public class GoodControllerIntTest {
                 .size(3)
                 .build();
         MvcResult mvcResult = mockMvc.perform
-                        (post("/api/v1/good/_searchByCategory")
+                        (post("/api/v1/good/_search")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(goodQueryDto)))
                 .andExpect(status().is2xxSuccessful())
                 .andReturn();
-        ArrayList<Good> goods = parseResponse(mvcResult, ArrayList.class);
+        List<Good> goods = parseResponse(mvcResult, ArrayList.class);
         assertThat(goods.size()).isEqualTo(1);
     }
     
@@ -148,12 +146,12 @@ public class GoodControllerIntTest {
                 .size(4)
                 .build();
         MvcResult mvcResult = mockMvc.perform
-                        (post("/api/v1/good/_searchByCategoryAndManufacturer")
+                        (post("/api/v1/good/_search")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(goodQueryDto)))
                 .andExpect(status().is2xxSuccessful())
                 .andReturn();
-        ArrayList<Good> goods = parseResponse(mvcResult, ArrayList.class);
+        List<Good> goods = parseResponse(mvcResult, ArrayList.class);
         assertThat(goods.size()).isEqualTo(4);
     }
     
